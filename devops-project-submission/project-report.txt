@@ -1,0 +1,80 @@
+Project Report – DevOps Website Deployment
+
+1. Overview
+I created a fully responsive 5-page website using HTML and CSS. 
+The pages include Home, About, Services, Gallery, and Contact.
+After building the website locally, I uploaded it to GitHub and deployed it on an AWS EC2 instance using Nginx.
+This project helped me understand EC2 setup, security groups, Linux commands, Git workflow, and website hosting.
+
+2. Step-by-Step Process
+
+Step 1: Create Website
+- Built all pages: index.html, about.html, services.html, gallery.html, contact.html
+- Created a separate CSS file for design
+- Linked all pages through a navigation bar
+- Tested website locally
+
+Step 2: Add Website to GitHub
+- Created a new GitHub repository
+- Uploaded all website files
+- Added README.md
+- Added screenshots folder
+
+Step 3: Launch EC2 Instance
+- Ubuntu 22.04
+- t2.micro free tier
+- Added rules for SSH (22) and HTTP (80)
+- Attached Elastic IP
+
+Step 4: Connect EC2 via SSH
+Commands used:
+chmod 400 key.pem
+ssh -i key.pem ubuntu@<http://13.204.244.158/Home.html>
+
+Step 5: Install Nginx
+sudo apt update
+sudo apt install nginx -y
+sudo systemctl start nginx
+
+Step 6: Deploy Website to EC2
+git clone <https://github.com/Rahulsharma1199/business-website-project.git>
+sudo rm -rf /var/www/html/*
+sudo mv project-folder/* /var/www/html/
+sudo systemctl restart nginx
+
+Step 7: Test Website
+Opened: http://<http://13.204.244.158>
+Website loaded successfully.
+
+3. Errors Faced
+
+Error 1: CSS not loading  
+Reason: wrong path  
+Fix: <link rel="stylesheet" href="style.css">
+
+Error 2: Image names causing issues  
+Fix: removed spaces in file names (about.png, home.png)
+
+Error 3: Permission denied in /var/www/html  
+Fix:
+sudo chmod -R 755 /var/www/html
+
+Error 4: Git not installed on EC2  
+Fix:
+sudo apt install git -y
+
+4. How I Solved Them
+- Used correct file paths  
+- Renamed files without spaces  
+- Fixed folder permissions  
+- Installed missing packages  
+- Re-tested website after every step  
+
+5. Final Screenshots (stored in screenshots/)
+- EC2 dashboard  
+- Elastic IP  
+- Terminal SSH  
+- Git clone  
+- Nginx status  
+- Website live view  
+- Local website screenshots  
